@@ -1,3 +1,21 @@
 # Learning the basics of java
 
 The goal is to explore java and build a restful api with spring boot.
+
+## What am I doing?
+
+ - Create a eureka discovery service to automatically register multiple instance of a avaialbe service to be used on other micro-services.
+ - Creating first microservice(identiy-service) with eureka discovery enabled delegating responsiblities of
+   
+    - Create new user (Registration)
+    - User login
+    - User details
+    - User update
+    - User delete
+
+- Creating second microservice(uam-service) with eureka discovery enabled delegating responsiblities of
+
+   - Password reset
+   - Email verification
+
+- Using spring could API gateway as a load balancer
