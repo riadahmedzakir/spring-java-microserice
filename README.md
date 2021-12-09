@@ -5,6 +5,9 @@ The goal is to explore java and build a restful api with spring boot.
 ## What am I doing?
 
  - Create a eureka discovery service to automatically register multiple instance of a avaialbe service to be used on other micro-services.
+
+ `*Note: With docker windows installed, app-settings need to specify the prefered hostman or clean up host entry for services to be asigned to localhost, or it will be hosted using a docker host address.`
+
  - Creating first microservice(identiy-service) with eureka discovery enabled delegating responsiblities of
    
     - Create new user (Registration)
@@ -12,7 +15,7 @@ The goal is to explore java and build a restful api with spring boot.
     - User details
     - User update
     - User delete
-
+ 
 - Creating second microservice(uam-service) with eureka discovery enabled delegating responsiblities of
 
    - Password reset
