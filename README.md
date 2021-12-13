@@ -22,3 +22,4 @@ The goal is to explore java and build a restful api with spring boot.
    - Email verification
 
 - Using spring could API gateway as a load balancer
+- Using jwt token to authorize endpoints using gateway filters
