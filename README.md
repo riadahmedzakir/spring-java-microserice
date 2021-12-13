@@ -23,3 +23,4 @@ The goal is to explore java and build a restful api with spring boot.
 
 - Using spring could API gateway as a load balancer
 - Using jwt token to authorize endpoints using gateway filters
+- Creating a spring cloud config server to centralize configurations 
