@@ -12,4 +12,5 @@ public @Data class UserDto implements Serializable {
     private String Email;
     private String UserId;
     private String EncryptedPassword;
+    private String Password;
 }

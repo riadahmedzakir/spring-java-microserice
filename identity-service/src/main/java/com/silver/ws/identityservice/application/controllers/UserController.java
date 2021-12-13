@@ -3,12 +3,15 @@ package com.silver.ws.identityservice.application.controllers;
 import javax.validation.Valid;
 
 import com.silver.ws.identityservice.application.models.CreateUserRequestModel;
+import com.silver.ws.identityservice.application.models.CreateUserResponseModel;
 import com.silver.ws.identityservice.application.service.UserService;
 import com.silver.ws.identityservice.application.shared.UserDto;
 
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -28,12 +31,13 @@ public class UserController {
     }
 
     @PostMapping
-    public String createUser(@Valid @RequestBody CreateUserRequestModel user){
+    public ResponseEntity<CreateUserResponseModel> createUser(@Valid @RequestBody CreateUserRequestModel user) {
         ModelMapper modelMapper = new ModelMapper();
         modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
         UserDto userDto = modelMapper.map(user, UserDto.class);
-        _userService.createUser(userDto);
+        UserDto createdUser = _userService.createUser(userDto);
+        CreateUserResponseModel returnValue = modelMapper.map(createdUser, CreateUserResponseModel.class);
 
-        return "User Created";
+        return ResponseEntity.status(HttpStatus.CREATED).body(returnValue);
     }
 }
