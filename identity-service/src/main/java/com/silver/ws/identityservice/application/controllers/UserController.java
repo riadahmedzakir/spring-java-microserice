@@ -2,6 +2,7 @@ package com.silver.ws.identityservice.application.controllers;
 
 import javax.validation.Valid;
 
+import org.springframework.core.env.Environment;
 import com.silver.ws.identityservice.application.models.CreateUserRequestModel;
 import com.silver.ws.identityservice.application.models.CreateUserResponseModel;
 import com.silver.ws.identityservice.application.service.UserService;
@@ -25,9 +26,12 @@ public class UserController {
     @Autowired
     private UserService _userService;
 
+    @Autowired
+    private Environment _enviorment;
+
     @GetMapping("/status/check")
     public String status() {
-        return "working";
+        return "working... Token secret : "  + _enviorment.getProperty("token.secret");
     }
 
     @PostMapping

@@ -1,0 +1,12 @@
+version: '3'
+services: 
+    rabbitmq-server: 
+        image: "rabbitmq:3.9.7-management"
+        hostname: rabbitmq
+        restart: always
+        ports:
+            - "5672:5672"
+            - "15672:15672"
+        expose: 
+            - "5672"
+            - "15672"
