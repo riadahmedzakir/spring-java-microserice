@@ -35,10 +35,11 @@ public class UserService implements IUserService {
 
     @Autowired
     public UserService(UserRepository userRepository, BCryptPasswordEncoder bCryptPasswordEncoder,
-            RestTemplate restTemplate) {
+            RestTemplate restTemplate, Environment environment) {
         this._userRepository = userRepository;
         this._bCryptPasswordEncoder = bCryptPasswordEncoder;
         this._restTemplate = restTemplate;
+        this._environment = environment;
         this._logger = LoggerFactory.getLogger(this.getClass());
     }
 
@@ -86,17 +87,18 @@ public class UserService implements IUserService {
         }
 
         UserDto userDto = new ModelMapper().map(userEntity, UserDto.class);
-
-        String albumsUrl = String.format(_environment.getProperty("albums.url"), userId);
+        
+        String albumUrlVariable = _environment.getProperty("albums.url");
+        String albumsUrl = String.format(albumUrlVariable, userId);
 
         ResponseEntity<List<AlbumResponseModel>> albumsListResponse = _restTemplate.exchange(albumsUrl, HttpMethod.GET,
                 null, new ParameterizedTypeReference<List<AlbumResponseModel>>() {
                 });
 
         _logger.info("Before calling albums Microservice");
-        
+
         List<AlbumResponseModel> albumsList = albumsListResponse.getBody();
-        
+
         _logger.info("After calling albums Microservice");
 
         userDto.setAlbums(albumsList);
