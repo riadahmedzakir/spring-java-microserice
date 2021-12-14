@@ -5,6 +5,7 @@ import javax.validation.Valid;
 import org.springframework.core.env.Environment;
 import com.silver.ws.identityservice.application.models.CreateUserRequestModel;
 import com.silver.ws.identityservice.application.models.CreateUserResponseModel;
+import com.silver.ws.identityservice.application.models.UserResponseModel;
 import com.silver.ws.identityservice.application.service.UserService;
 import com.silver.ws.identityservice.application.shared.UserDto;
 
@@ -14,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,7 +33,7 @@ public class UserController {
 
     @GetMapping("/status/check")
     public String status() {
-        return "working... Token secret : "  + _enviorment.getProperty("token.secret");
+        return "working... Token secret : " + _enviorment.getProperty("token.secret");
     }
 
     @PostMapping
@@ -43,5 +45,14 @@ public class UserController {
         CreateUserResponseModel returnValue = modelMapper.map(createdUser, CreateUserResponseModel.class);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(returnValue);
+    }
+
+    @GetMapping(value = "/{userId}")
+    public ResponseEntity<UserResponseModel> getUser(@PathVariable("userId") String userId) {
+
+        UserDto userDto = _userService.getUserByUserId(userId);
+        UserResponseModel returnValue = new ModelMapper().map(userDto, UserResponseModel.class);
+
+        return ResponseEntity.status(HttpStatus.OK).body(returnValue);
     }
 }

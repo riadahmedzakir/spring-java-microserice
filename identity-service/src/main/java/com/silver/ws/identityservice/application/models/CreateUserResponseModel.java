@@ -6,5 +6,5 @@ public @Data class CreateUserResponseModel {
     private String FirstName;
     private String LastName;
     private String Email;
-    private String UserId;
+    private String userId;
 }

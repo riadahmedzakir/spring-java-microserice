@@ -29,7 +29,7 @@ public @Data class UserEntity implements Serializable {
     private String email;
 
     @Column(nullable = false, unique = true)
-    private String UserId;
+    private String userId;
 
     @Column(nullable = false)
     private String EncryptedPassword;

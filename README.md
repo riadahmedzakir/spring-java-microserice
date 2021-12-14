@@ -30,3 +30,5 @@ The goal is to explore java and build a restful api with spring boot.
 - Creating a spring cloud config server to centralize configurations 
 - Spring cloud bus to change runtime configuration for all microservices. 
 - RabbitMQ on docker as message bus
+- Setting asymmetric encrption for token secret
+- Spring Rest Template For Clientside load balancing
