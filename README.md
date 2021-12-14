@@ -32,3 +32,4 @@ The goal is to explore java and build a restful api with spring boot.
 - RabbitMQ on docker as message bus
 - Setting asymmetric encrption for token secret
 - Spring Rest Template For Clientside load balancing
+- Replacing Rest Template with feign Client to communicate between microservices
